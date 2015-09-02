@@ -1,2 +1,2 @@
 # computational-tools
-Computational Tools for Big Data
+Computational Tools for Big Data course development
