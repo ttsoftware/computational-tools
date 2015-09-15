@@ -9,6 +9,10 @@ def solve_matrix(filename):
     return np.linalg.solve(A, last_column)
 
 
+def roots(filename):
+    mat = np.matrix(week2.read_matrix(filename))
+
+
 #ENyYffaq
 
 if "__main__" == __name__:
