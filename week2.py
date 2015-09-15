@@ -2,6 +2,7 @@ import json
 import re
 
 
+
 def read_matrix(filename):
     f = open(filename, 'r')
     lines = f.readlines()
