@@ -8,7 +8,7 @@ def read_matrix(filename):
     lines = f.readlines()
     matrix_list = []
     for line in lines:
-        matrix_list.append([c for c in re.split("[, ]", line.rstrip())])
+        matrix_list.append([float(c) for c in re.split("[, ]", line.rstrip())])
     f.close()
     return matrix_list
 
