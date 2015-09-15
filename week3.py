@@ -1,8 +1,8 @@
 import numpy as np
 import week2
-import matplotlib.pyplot as plt
-import scipy
+import pandas
 from scipy.optimize import newton
+
 
 def solve_matrix(filename):
     mat = np.matrix(week2.read_matrix(filename))
@@ -18,26 +18,40 @@ def roots(filename):
     x = np.asarray(points[:, 0]).squeeze()
     y = np.asarray(points[:, 1]).squeeze()
 
-    # calculate polynomial
     z = np.polyfit(x, y, 3)
     f = np.poly1d(z)
 
-    # calculate new x's and y's
-    #fx = np.linspace(x[0], x[-1], 50)
-    #fy = f(fx)
-
     root = newton(f, 0)
-
-    #print root
-    #print f(root)
-    #plt.plot(root, f(root), 'ro')
-    #plt.plot(x, y, 'o', fx, fy)
-    #plt.xlim([x[0] - 1, x[-1] + 1])
-    #plt.show()
 
     return root
 
 
+def panda_movie_merge():
+    movies = pandas.read_table('movies.dat', sep='::', names=['movie id', 'title', 'genre'])
+    ratings = pandas.read_table('ratings.dat', sep='::', names=['user id', 'movie id', 'rating', 'timestamp'])
+    users = pandas.read_table('users.dat', sep='::', names=['user id', 'gender', 'age', 'occupation code', 'zip'])
+
+    return movies.merge(
+        ratings.merge(users, on='user id'),
+        on='movie id'
+    )
+
+
+def panda_top_movies(movie_data):
+    group_by_movie = movie_data.groupby(['movie id'])
+    ratings_by_movie = group_by_movie['rating'].agg({'rating count': sum})
+
+    top_five = ratings_by_movie.sort(columns='rating count', ascending=False).iloc[0:5]
+    active_titles = ratings_by_movie[ratings_by_movie['rating count'] >= 250]
+
+    #print top_five
+    #print active_titles
+
+    print movie_data.merge(active_titles.reset_index(), on='movie id')
+
+
 if "__main__" == __name__:
-    print solve_matrix("matrix3")
-    print roots('ENyYffaq.txt')
+    # print solve_matrix("matrix3")
+    # print roots('ENyYffaq.txt')
+    movie_data = panda_movie_merge()
+    panda_top_movies(movie_data)
