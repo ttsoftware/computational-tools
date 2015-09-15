@@ -86,7 +86,35 @@ tr '\t' ' ' < shakespeare.txt | sed 's/[^a-zA-Z ]//g' | tr ' ' '\n' | tr A-Z a-z
 
 
 \section{Exercise 1.4}
+
+We chose to use gbar instead of AWS.
+
 \section{Exercise 1.5}
+
+Git pull on gbar:
+
+\begin{lstlisting}
+gbarlogin1(s152165) $ git pull
+remote: Counting objects: 15, done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 15 (delta 4), reused 1 (delta 1), pack-reused 2
+Unpacking objects: 100% (15/15), done.
+From https://github.com/ttsoftware/computational-tools
+   1d522e1..407cabb  master     -> origin/master
+Merge made by recursive.
+ ENyYffaq.txt |   40 ++++++++++++++++++++++++++++++++++++++++
+ comm         |    1 +
+ matrix3      |    3 +++
+ week2.py     |   52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ week3.py     |   15 +++++++++++++++
+ 5 files changed, 111 insertions(+), 0 deletions(-)
+ create mode 100644 ENyYffaq.txt
+ create mode 100644 comm
+ create mode 100644 matrix3
+ create mode 100644 week2.py
+ create mode 100644 week3.py
+~/computational-tools
+\end{lstlisting}
 
 \section{Exercise 2.1}
 \section{Exercise 2.2}
