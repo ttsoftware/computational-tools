@@ -47,14 +47,18 @@ def panda_top_movies(movie_data):
     #print top_five
     #print active_titles
 
-    print movie_data.merge(active_titles.reset_index(), on='movie id')
+    movies_ratings = movie_data.merge(active_titles.reset_index(), on='movie id')
+    # filter gender
+    female_ratings = movies_ratings[movies_ratings['gender'].isin(['F'])]
+    male_ratings = movies_ratings[movies_ratings['gender'].isin(['M'])]
+
+    print female_ratings.groupby(['movie id'])['rating'].agg(['mean']).sort(columns='mean', ascending=False).iloc[0:3]
 
 
 
 if "__main__" == __name__:
     #print solve_matrix("matrix3")
     #print roots("ENyYffaq.txt")
-    print predict("pizza-train.json")    # print solve_matrix("matrix3")
     # print roots('ENyYffaq.txt')
     movie_data = panda_movie_merge()
     panda_top_movies(movie_data)
