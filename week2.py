@@ -1,4 +1,3 @@
-import json
 import re
 
 
@@ -34,19 +33,40 @@ def bit_strings(N):
 
 def bag_of_words(filename):
     f = open(filename)
-    j = json.load(f)
+    lines = f.readlines()
+    request_texts = []
     theD = {}
-    for dic in j:
-        for word in dic['request_text'].rstrip().split(' '):
-            if word in theD.keys():
-                theD[word] += 1
-            else:
-                theD[word] = 1
-    return theD
+    cnt = 0
+    pat = re.compile('\s+"request_text": "(?P<text>.+)"')
+    patr = re.compile('\s+"requester_received_pizza": (?P<pizza>.+),')
+    results = []
+    for line in lines:
+        result = re.search(pat, line)
+        if result:
+            request_texts.append(result.group('text').lower())
+            for word in re.findall("[\w\']+", result.group('text')):
+                word = word.lower()
+                if word not in theD.keys():
+                    theD[word] = cnt
+                    cnt += 1
+        pizza_result = re.search(patr, line)
+        if pizza_result:
+            results.append(0) if pizza_result.group('pizza') == 'false' else results.append(1)
+            if cnt > 1000:
+                break
+
+    bag = []
+    for i, text in enumerate(request_texts):
+        vec = [0] * len(theD) + [results[i]]
+        for word in re.findall("[\w\']+", text):
+            vec[theD[word]] += 1
+        bag.append(vec)
+
+    return bag
 
 
 if "__main__" == __name__:
-    print read_matrix('matrix')
-    #write_matrix([[2, 3], [1, 4]], 'matrix2')
-    #print bit_strings(3)
-    #print bag_of_words("pizza-train.json")
+    # print read_matrix('matrix')
+    # write_matrix([[2, 3], [1, 4]], 'matrix2')
+    # print bit_strings(3)
+    print bag_of_words("pizza-train.json")

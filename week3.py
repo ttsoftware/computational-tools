@@ -50,8 +50,11 @@ def panda_top_movies(movie_data):
     print movie_data.merge(active_titles.reset_index(), on='movie id')
 
 
+
 if "__main__" == __name__:
-    # print solve_matrix("matrix3")
+    #print solve_matrix("matrix3")
+    #print roots("ENyYffaq.txt")
+    print predict("pizza-train.json")    # print solve_matrix("matrix3")
     # print roots('ENyYffaq.txt')
     movie_data = panda_movie_merge()
     panda_top_movies(movie_data)
