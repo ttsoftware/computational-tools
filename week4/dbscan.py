@@ -1,6 +1,4 @@
-from numpy import array_equal
 from sklearn.metrics import jaccard_similarity_score
-from datapoint import DataPoint
 from week4.cluster import Cluster
 
 
@@ -31,9 +29,9 @@ class DBSCAN(object):
                 noise_cluster.datapoints += [datapoint]
             else:
                 cluster = Cluster()
-                clusters += [cluster]
-
                 self.expand_cluster(dataset, datapoint, neighbour_points, cluster)
+
+                clusters += [cluster]
 
         return clusters
 
@@ -56,6 +54,7 @@ class DBSCAN(object):
 
                 if len(new_neighbour_points) >= self.min_size:
                     neighbour_points += new_neighbour_points
+                    neighbour_points = list(set(neighbour_points))
 
             if not new_datapoint.belongs_to_cluster:
                 cluster.datapoints += [new_datapoint]
@@ -79,7 +78,5 @@ class DBSCAN(object):
 
                 if score <= self.epsilon:
                     datapoints += [new_datapoint]
-
-        #print [d.data_vector for d in datapoints]
 
         return datapoints

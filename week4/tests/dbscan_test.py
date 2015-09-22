@@ -16,12 +16,10 @@ class DBSCANTest(unittest.TestCase):
         clusters = dbscan.scan(dataset)
 
         print len(clusters)
-        print len(clusters[0].datapoints)
-
-        print clusters[0].datapoints[0].data_vector
-
-        #print clusters[1].datapoints[0].data_vector
-        #print clusters[2].datapoints[0].data_vector
+        print clusters[0] == clusters[1] == clusters[2]
+        print clusters[0]
+        print clusters[1]
+        print clusters[2]
 
 if __name__ == '__main__':
     unittest.main()

@@ -19,4 +19,4 @@ class DataConverter(object):
 
         print matrix
 
-        return map(lambda x: DataPoint(x), matrix)
+        return map(lambda (i, x): DataPoint(x, i), enumerate(matrix))
