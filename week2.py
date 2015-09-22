@@ -31,7 +31,7 @@ def bit_strings(N):
     return result
 
 
-def bag_of_words(filename):
+def bag_of_words(filename, limit = None):
     f = open(filename)
     lines = f.readlines()
     request_texts = []
@@ -52,7 +52,7 @@ def bag_of_words(filename):
         pizza_result = re.search(patr, line)
         if pizza_result:
             results.append(0) if pizza_result.group('pizza') == 'false' else results.append(1)
-            if cnt > 1000:
+            if limit and len(results) == limit:
                 break
 
     bag = []

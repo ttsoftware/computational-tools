@@ -2,6 +2,8 @@ import numpy as np
 import week2
 import pandas
 from scipy.optimize import newton
+from sklearn.linear_model import LogisticRegression
+import math
 
 
 def solve_matrix(filename):
@@ -55,10 +57,24 @@ def panda_top_movies(movie_data):
     print female_ratings.groupby(['movie id'])['rating'].agg(['mean']).sort(columns='mean', ascending=False).iloc[0:3]
 
 
+def bag_prediction(bag):
+    training_data = bag[:-int(math.floor(len(bag)*0.1))]
+    test_data = bag[-int(math.ceil(len(bag)*0.1)):]
+    dataset = [row[:-1] for row in training_data]
+    t_vec = [row[-1] for row in training_data]
+
+    classifier = LogisticRegression().fit(dataset, t_vec)
+
+    test_dataset = [row[:-1] for row in test_data]
+    test_t_vec = [row[-1] for row in test_data]
+
+    return classifier.predict(test_dataset), classifier.score(test_dataset, test_t_vec)
 
 if "__main__" == __name__:
-    #print solve_matrix("matrix3")
-    #print roots("ENyYffaq.txt")
+    # print solve_matrix("matrix3")
+    # print roots("ENyYffaq.txt")
     # print roots('ENyYffaq.txt')
-    movie_data = panda_movie_merge()
-    panda_top_movies(movie_data)
+    # movie_data = panda_movie_merge()
+    # panda_top_movies(movie_data)
+    pizza_bag = week2.bag_of_words("pizza-train.json", limit=None)
+    print bag_prediction(pizza_bag)
