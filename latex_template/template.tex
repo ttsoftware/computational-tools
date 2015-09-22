@@ -138,10 +138,160 @@ For a reference of commits see \href{https://github.com/ttsoftware/computational
 
 \section{Exercise 3.3}
 
+\subsection{Top five} 
+     
+\begin{verbatim}
+movie id 		 rating count
+2858             14800
+260              13321
+1196             12836
+1210             11598
+2028             11507
+\end{verbatim}
 
+\subsection{Active title}
+
+\begin{verbatim}
+movie id  		  rating count            
+1                 8613
+2                 2244
+3                 1442
+4                  464
+5                  890
+6                 3646
+7                 1562
+9                  271
+10                3144
+11                3919
+12                 378
+13                 323
+14                 542
+15                 359
+16                2587
+17                3363
+18                 524
+19                 965
+20                 406
+21                4914
+22                1266
+23                 360
+24                1984
+25                3578
+26                 353
+28                 726
+29                1637
+30                 270
+31                 439
+32                5962
+34                6814
+36                3673
+39                4935
+41                 958
+42                 634
+43                 572
+44                 867
+45                1863
+46                 516
+47                4669
+48                1137
+50                8054
+52                1569
+57                 337
+58                2051
+60                1147
+62                2000
+63                 317
+65                 295
+69                1166
+70                2885
+72                 338
+73                 855
+74                 357
+76                 508
+79                 297
+81                 525
+82                 345
+85                 660
+86                 801
+                   ...
+[2161 rows x 1 columns]
+\end{verbatim}
+
+\subsection{Top 3 female ratings}
+
+\begin{verbatim}
+movie id  mean
+745       4.644444
+1148      4.588235
+3022      4.575758
+[3 rows x 1 columns]
+\end{verbatim}
+
+\subsection{Top 3 male ratings}
+
+\begin{verbatim}
+movie id  mean
+2905      4.639344
+858       4.583333
+2019      4.576628
+[3 rows x 1 columns]
+\end{verbatim}
+
+\subsection{Top 10 female difference}
+
+\begin{verbatim}
+      movie id    mean\_x    mean\_y  mean\_diff
+1129      2084  3.861111  2.666667   1.194444
+13          15  3.200000  2.341270   0.858730
+579       1088  3.790378  2.959596   0.830782
+864       1592  3.057143  2.233766   0.823377
+924       1707  2.486486  1.683761   0.802726
+818       1460  3.156250  2.435484   0.720766
+116        203  3.486842  2.795276   0.691567
+1382      2468  3.254717  2.578358   0.676359
+299        506  3.862745  3.190476   0.672269
+373        650  3.800000  3.136364   0.663636
+[10 rows x 4 columns]
+\end{verbatim}
+
+\subsection{Top 10 male difference}
+
+\begin{verbatim}
+      movie id    mean\_x    mean\_y  mean\_diff
+2019      3658  2.900000  3.779661  -0.879661
+1934      3487  3.000000  3.765625  -0.765625
+1315      2377  2.250000  2.994152  -0.744152
+781       1382  2.100000  2.837607  -0.737607
+1696      3036  2.578947  3.309677  -0.730730
+638       1201  3.494949  4.221300  -0.726351
+298        504  2.300000  2.994048  -0.694048
+2079      3760  2.878788  3.555147  -0.676359
+1194      2165  2.888889  3.536585  -0.647696
+1713      3066  3.090909  3.737705  -0.646796
+[10 rows x 4 columns]
+\end{verbatim}
+
+\subsection{Top 5 standard deviation}
+
+\begin{verbatim}
+movie id  std
+1924      1.455998
+2314      1.372813
+3864      1.364700
+2459      1.332448
+231       1.321333
+[5 rows x 1 columns]
+\end{verbatim}
 
 \section{Exercise 3.4}
 \section{Exercise 3.5}
+
+\texttt{python week3\_cython.pyx It took 0.771023988724 seconds to compute the sum 500 times.}
+
+\texttt{python week3\_cython\_run.py
+It took 0.586192846298 seconds to compute the sum 500 times.}
+
+We notice the reduce the running time by approximately 0.18 seconds or approximately 20\%.
 
 \section{Exercise 4.1}
 
