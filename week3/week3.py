@@ -108,6 +108,7 @@ def panda_top_movies(movie_data):
         top_5_std_rating
     )
 
+
 def bag_prediction(bag):
     training_data = bag[:-int(math.floor(len(bag)*0.1))]
     test_data = bag[-int(math.ceil(len(bag)*0.1)):]
