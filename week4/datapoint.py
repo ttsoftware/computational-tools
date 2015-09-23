@@ -4,13 +4,14 @@ class DataPoint(object):
     def __init__(self, data_vector, index):
         """
         data_vector is a numpy matrix
+        index should be the unique index in the original matrix
         :param data_vector:
         """
         self.data_vector = data_vector
         self._index = index
         self._visited = False
         self._belongs_to_cluster = False
-        self._noise = None
+        self._noise = False
 
     @property
     def index(self):
@@ -37,15 +38,15 @@ class DataPoint(object):
         self._belongs_to_cluster = value
 
     @property
-    def noise(self):
+    def is_noise(self):
         return self._noise
 
-    @noise.setter
-    def noise(self, value):
+    @is_noise.setter
+    def is_noise(self, value):
         self._noise = value
 
     def __str__(self):
-        return str(self.index) + "\n" + self.data_vector.__str__()
+        return str(self.index) + ":" + self.data_vector.__str__()
 
     def __eq__(self, other):
         return self.index == other.index

@@ -3,9 +3,9 @@ import numpy as np
 
 class Cluster(object):
 
-    def __init__(self, datapoints=[], is_noise=False):
-        self._datapoints = datapoints
-        self.is_noise = is_noise
+    def __init__(self, datapoints=None, is_noise=False):
+        self._datapoints = [] if datapoints is None else datapoints
+        self._is_noise = is_noise
 
     @property
     def datapoints(self):
@@ -14,6 +14,14 @@ class Cluster(object):
     @datapoints.setter
     def datapoints(self, value):
         self._datapoints = value
+
+    @property
+    def is_noise(self):
+        return self._is_noise
+
+    @is_noise.setter
+    def is_noise(self, value):
+        self._is_noise = value
 
     def __str__(self):
         if len(self.datapoints) > 0:

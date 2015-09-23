@@ -13,8 +13,7 @@ class DBSCAN(object):
         :rtype : object
         :param dataset:
         """
-        noise_cluster = Cluster(is_noise=True)
-        clusters = [noise_cluster]
+        clusters = []
 
         for datapoint in dataset:
             if datapoint.visited:
@@ -24,15 +23,18 @@ class DBSCAN(object):
             neighbour_points = self.region_query(dataset, datapoint)
 
             if len(neighbour_points) < self.min_size:
-                datapoint.noise = True
-                datapoint.belongs_to_cluster = True
-                noise_cluster.datapoints += [datapoint]
+                datapoint.is_noise = True
             else:
                 cluster = Cluster()
                 self.expand_cluster(dataset, datapoint, neighbour_points, cluster)
+                clusters.append(cluster)
 
-                clusters += [cluster]
+        noise_cluster = Cluster(is_noise=True)
+        for datapoint in dataset:
+            if datapoint.is_noise:
+                noise_cluster.datapoints.append(datapoint)
 
+        clusters.append(noise_cluster)
         return clusters
 
     def expand_cluster(self, dataset, datapoint, neighbour_points, cluster):
@@ -42,7 +44,7 @@ class DBSCAN(object):
         :param neighbour_points:
         :param cluster:
         """
-        cluster.datapoints += [datapoint]
+        cluster.datapoints.append(datapoint)
         datapoint.belongs_to_cluster = True
 
         for new_datapoint in neighbour_points:
@@ -54,29 +56,30 @@ class DBSCAN(object):
 
                 if len(new_neighbour_points) >= self.min_size:
                     neighbour_points += new_neighbour_points
-                    neighbour_points = list(set(neighbour_points))
 
             if not new_datapoint.belongs_to_cluster:
-                cluster.datapoints += [new_datapoint]
+                cluster.datapoints.append(new_datapoint)
+                new_datapoint.is_noise = False
                 new_datapoint.belongs_to_cluster = True
 
     def region_query(self, dataset, datapoint):
         """
-        Returns a list of datapoints in datapoint's epsilon-neigbourhood
+        Returns a list of new datapoints in datapoint's epsilon-neigbourhood
         :param datapoint:
         :return:
         """
-        datapoints = []
+        datapoints = [datapoint]
+
         for new_datapoint in dataset:
 
             if new_datapoint != datapoint:
 
-                score = 1 - jaccard_similarity_score(
+                distance = 1 - jaccard_similarity_score(
                     datapoint.data_vector,
                     new_datapoint.data_vector
                 )
 
-                if score <= self.epsilon:
-                    datapoints += [new_datapoint]
+                if distance <= self.epsilon:
+                    datapoints.append(new_datapoint)
 
         return datapoints
