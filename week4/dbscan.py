@@ -1,3 +1,5 @@
+import hashlib
+import numpy
 from scipy.spatial.distance import jaccard
 from week4.cluster import Cluster
 
