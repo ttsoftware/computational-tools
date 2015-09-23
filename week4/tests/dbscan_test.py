@@ -1,5 +1,6 @@
 import os
 import unittest
+import cProfile
 from sklearn.metrics.metrics import jaccard_similarity_score
 from week4.data_converter import DataConverter
 from week4.dbscan import DBSCAN
