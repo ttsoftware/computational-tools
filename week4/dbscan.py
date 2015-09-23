@@ -1,11 +1,13 @@
-from sklearn.metrics import jaccard_similarity_score
+from scipy.spatial.distance import jaccard
 from week4.cluster import Cluster
 
 
 class DBSCAN(object):
+
     def __init__(self, epsilon, min_size):
         self.epsilon = epsilon
         self.min_size = min_size
+        self.regions = {}
 
     def scan(self, dataset):
         """
@@ -16,11 +18,15 @@ class DBSCAN(object):
         clusters = []
 
         for datapoint in dataset:
+            if str(datapoint.data_vector) not in self.regions:
+                self.regions[str(datapoint.data_vector)] = self.region_query(dataset, datapoint)
+
+        for datapoint in dataset:
             if datapoint.visited:
                 continue
 
             datapoint.visited = True
-            neighbour_points = self.region_query(dataset, datapoint)
+            neighbour_points = self.regions[str(datapoint.data_vector)]
 
             if len(neighbour_points) < self.min_size:
                 datapoint.is_noise = True
@@ -52,7 +58,7 @@ class DBSCAN(object):
             if not new_datapoint.visited:
 
                 new_datapoint.visited = True
-                new_neighbour_points = self.region_query(dataset, new_datapoint)
+                new_neighbour_points = self.regions[str(new_datapoint.data_vector)]
 
                 if len(new_neighbour_points) >= self.min_size:
                     neighbour_points += new_neighbour_points
@@ -74,7 +80,7 @@ class DBSCAN(object):
 
             if new_datapoint != datapoint:
 
-                distance = 1 - jaccard_similarity_score(
+                distance = jaccard(
                     datapoint.data_vector,
                     new_datapoint.data_vector
                 )

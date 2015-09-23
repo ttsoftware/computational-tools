@@ -1,5 +1,4 @@
-import pickle
-import numpy as np
+import cPickle
 from scipy.sparse import csr_matrix
 from datapoint import DataPoint
 
@@ -14,7 +13,7 @@ class DataConverter(object):
         :return:
         """
         pkl_file = open(filename, 'rb')
-        data = pickle.load(pkl_file)
+        data = cPickle.load(pkl_file)
         matrix = csr_matrix(data).todense()
 
         return map(lambda (i, x): DataPoint(x, i), enumerate(matrix))
