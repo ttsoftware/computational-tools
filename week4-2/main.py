@@ -9,7 +9,7 @@ def preprocess(data):
     print dataset
     exit()
     combi = list(combinations(range(len(dataset)), 2))
-    exit()
+
 
 
 def scan(filename, epsilon, min_size):
