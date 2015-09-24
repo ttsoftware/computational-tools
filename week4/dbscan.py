@@ -18,7 +18,7 @@ class DBSCAN(object):
         clusters = []
 
         for datapoint in dataset:
-            if str(datapoint.data_vector) not in self.regions:
+            if datapoint not in self.regions:
                 self.regions[str(datapoint.data_vector)] = self.region_query(dataset, datapoint)
 
         for datapoint in dataset:

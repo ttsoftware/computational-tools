@@ -1,18 +1,28 @@
+from itertools import combinations
 import pickle
 from scipy.sparse import csr_matrix
-from sklearn.metrics import jaccard_similarity_score
+from scipy.spatial.distance import jaccard, pdist, squareform
+
+
+def preprocess(data):
+    dataset = csr_matrix(data).indptr
+    print dataset
+    exit()
+    combi = list(combinations(range(len(dataset)), 2))
+    exit()
 
 
 def scan(filename, epsilon, min_size):
 
     pkl_file = open(filename, 'rb')
     data = pickle.load(pkl_file)
+    # preprocess(data)
     dataset = [{
         "data": x,
         "visited": False,
         "in_cluster": False,
         "is_noise": False
-    } for x in csr_matrix(data).todense()]
+    } for x in squareform(pdist(csr_matrix(data).todense(), 'jaccard'))]
 
     clusters = []
 
@@ -72,20 +82,11 @@ def region_query(dataset, datapoint, epsilon):
     :param datapoint:
     :return:
     """
-    datapoints = [datapoint]
-
-    dataset.remove(datapoint)
-    for new_datapoint in dataset:
-
-        distance = 1 - jaccard_similarity_score(
-            datapoint['data'],
-            new_datapoint['data']
-        )
-
+    neighbours = []
+    for i, distance in enumerate(datapoint['data']):
         if distance <= epsilon:
-            datapoints.append(new_datapoint)
-
-    return datapoints
+            neighbours.append(dataset[i])
+    return neighbours
 
 if "__main__" == __name__:
-    print len(scan("/home/rasmus/Documents/computational tools for big data/computational-tools/week4/test_files/data_1000points_1000dims.dat", 0.15, 2))
+    print len(scan("/home/rasmus/Documents/computational tools for big data/computational-tools/week4/test_files/data_100000points_100000dims.dat", 0.3, 2))
