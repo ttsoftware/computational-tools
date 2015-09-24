@@ -46,7 +46,7 @@ class DataPoint(object):
         self._noise = value
 
     def __str__(self): 
-        return str(self.index) + ":" + self.data_vector.__str__()
+        return self.data_vector.__str__()
 
     def __eq__(self, other):
         return self.index == other.index

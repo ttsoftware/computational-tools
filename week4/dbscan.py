@@ -1,3 +1,5 @@
+import hashlib
+import numpy
 from scipy.spatial.distance import jaccard
 from week4.cluster import Cluster
 
@@ -18,15 +20,15 @@ class DBSCAN(object):
         clusters = []
 
         for datapoint in dataset:
-            if datapoint not in self.regions:
-                self.regions[str(datapoint.data_vector)] = self.region_query(dataset, datapoint)
+            if str(datapoint.data_vector) not in self.regions:
+                self.regions[hash(datapoint.data_vector)] = self.region_query(dataset, datapoint)
 
         for datapoint in dataset:
             if datapoint.visited:
                 continue
 
             datapoint.visited = True
-            neighbour_points = self.regions[str(datapoint.data_vector)]
+            neighbour_points = self.regions[hash(datapoint.data_vector)]
 
             if len(neighbour_points) < self.min_size:
                 datapoint.is_noise = True
@@ -58,7 +60,7 @@ class DBSCAN(object):
             if not new_datapoint.visited:
 
                 new_datapoint.visited = True
-                new_neighbour_points = self.regions[str(new_datapoint.data_vector)]
+                new_neighbour_points = self.regions[hash(new_datapoint.data_vector)]
 
                 if len(new_neighbour_points) >= self.min_size:
                     neighbour_points += new_neighbour_points
