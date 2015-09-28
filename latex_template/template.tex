@@ -6,31 +6,93 @@
 \usepackage{cleveref}
 \usepackage{hyperref}
 
-\usepackage{listings}
-\usepackage{color}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{geometry}
+\usepackage{ulem}
+\usepackage{gauss}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{wrapfig}
+\usepackage{morefloats}
+\usepackage{upquote}
 
-\lstnewenvironment{python}[1][]{
-  \lstset{
-    language=python,
-    breaklines=true,
-    tabsize=4,
-    basicstyle=\ttfamily\small,
-    otherkeywords={1, 2, 3, 4, 5, 6, 7, 8 ,9 , 0, -, =, +, [, ], (, ), \{, \}, :, *, !},
-    keywordstyle=\color{blue},
-    stringstyle=\color{red},
-    showstringspaces=false,
-    emph={class, pass, in, for, while, if, is, elif, else, not, and, or, OR
-    def, print, exec, break, continue, return},
-    emphstyle=\color{black}\bfseries,
-    emph={[2]True, False, None, self},
-    emphstyle=[2]\color{key},
-    emph={[3]from, import, as},
-    emphstyle=[3]\color{blue},
-    morecomment=[s]{"""}{"""},
-    commentstyle=\color{gray}\slshape,
-    rulesepcolor=\color{blue},#1
-  }
-}{}
+
+%%%%%% COLORS %%%%%%%%
+
+\usepackage{xcolor}
+\definecolor{red1}{rgb}{0.7, 0.0, 0.3}
+\definecolor{red2}{rgb}{0.5, 0.0, 0.5}
+\definecolor{red3}{rgb}{0.3, 0.0, 0.7}
+
+%two definitions of the color grey
+\usepackage{color}
+\definecolor{listinggray}{gray}{0.9}
+%\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+
+\usepackage{listings}
+\lstset{
+	language=,
+	literate=
+		{æ}{{\ae}}1
+		{ø}{{\o}}1
+		{å}{{\aa}}1
+		{Æ}{{\AE}}1
+		{Ø}{{\O}}1
+		{Å}{{\AA}}1
+		{'}{{'}}1,
+	backgroundcolor=\color{listinggray},
+	tabsize=3,
+	rulecolor=,
+	basicstyle=\scriptsize,
+	upquote=true,
+	aboveskip={1.5\baselineskip},
+	columns=fixed,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,
+	prebreak =\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	frame=single,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	identifierstyle=\ttfamily,
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+\lstset{moredelim=[s][\color{gray}]{(*}{*)}}
+\lstset{morecomment=[l][\color{gray}]{##}}
+\lstset{moredelim=[s][\color{green!50!brown}]{"}{"}}
+\lstset{moredelim=[s][\color{green!50!brown}]{'}{'}}
+\lstset{moredelim=[s][\color{gray}]{/*}{*/}}
+
+\lstset{literate=
+	{0}{{{\color{violet}{0}}}}1
+	{1}{{{\color{violet}{1}}}}1
+	{2}{{{\color{violet}{2}}}}1
+	{3}{{{\color{violet}{3}}}}1
+	{4}{{{\color{violet}{4}}}}1
+	{5}{{{\color{violet}{5}}}}1
+	{6}{{{\color{violet}{6}}}}1
+	{7}{{{\color{violet}{7}}}}1
+	{8}{{{\color{violet}{8}}}}1
+	{9}{{{\color{violet}{9}}}}1
+	{?}{{{\color{orange}{?}}}}1
+}
+
+\lstset{emph={for, in, if, elif, else, return, def, print}, emphstyle={\color{blue}},,
+        emph={[3]std}, emphstyle={[3]\color{green}}}
+
+\lstset{emph={True, False}, emphstyle={\color{violet}},,
+        emph={[3]std}, emphstyle={[3]\color{green}}}
+
+%captions on listings
+\usepackage[center,font=small,labelfont=bf,textfont=it]{caption}
 
 \title{Insert Assignment Title Here\\02807 Computational Tools for Big Data}
 \author{Anonymous authors}
@@ -123,20 +185,263 @@ Merge made by recursive.
 For a reference of commits see \href{https://github.com/ttsoftware/computational-tools/commits/master}{https://github.com/ttsoftware/computational-tools/commits/master}.
 
 \section{Exercise 2.1}
+
+\begin{lstlisting}
+def read_matrix(filename):
+    """
+    Reads a file and tries to construct a matrix from data in the file
+
+    :param filename: name of file it be read
+    :return: list of lists of the numbers in the file
+    """
+    f = open(filename, 'r')
+
+    # Reads all lines from file into list
+    lines = f.readlines()
+
+    matrix_list = []
+    for line in lines:
+        # Using list comprehension to construct a new list of the numbers
+        # contained in each line
+        matrix_list.append([float(c) for c in re.split("[, ]", line.rstrip())])
+    f.close()
+    return matrix_list
+\end{lstlisting}
+
+The \texttt{read\_matrix} method, when run with the file mentioned in the excercise, returns the following:
+
+\begin{lstlisting}
+[[0.0, 1.0, 1.0, 3.0, 0.0], [0.0, 2.0, 3.0, 4.0, 10.0], [8.0, 2.0, 2.0, 0.0, 7.0]]
+\end{lstlisting}
+
+\begin{lstlisting}
+def write_matrix(array, filename):
+    """
+    Interprets a matrix (list of lists) and writes it to filename
+
+    :param array: Matrix (list of lists) to be written to file
+    :param filename: Name of the file to write to
+    """
+    f = open(filename, 'w')
+    output = ""
+    for l in array:
+        for c in l:
+            output += str(c) + ' '
+        output = output[:-1] + '\n'
+    f.write(output)
+    f.close()
+\end{lstlisting}
+
+The \texttt{write\_matrix} method, when run with a random matrix, creates the following file output:
+
+\begin{lstlisting}
+2 3 5
+1 4 2
+\end{lstlisting}
+
 \section{Exercise 2.2}
+
+\begin{lstlisting}
+def bit_strings(N):
+    """
+    Takes a number N and constructs all bit permutations of size N
+
+    :param N: Size of permutations
+    :return: List of all permutations of bit strings of size N
+    """
+    pools = [[0, 1]] * N
+    result = [[]]
+    for pool in pools:
+        result = [x+[y] for x in result for y in pool]
+    return result
+\end{lstlisting}
+
+For $N = 3$, this method yields the following result:
+
+\begin{lstlisting}
+[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+\end{lstlisting}
+
 \section{Exercise 2.3}
+
+\begin{lstlisting}
+def bag_of_words(filename):
+    """
+    Reads a very specific json file and constructs a bag-of-words representation
+    of people's comments and their ability to get free pizza.
+
+    :param filename: Name of file to be read
+    :return: Bag-of-words representation
+    """
+    f = open(filename)
+    lines = f.readlines()
+    request_texts = []
+    theD = {}
+    cnt = 0
+
+    # Regular expression that matches request_text line
+    pat = re.compile('\s+"request_text": "(?P<text>.+)"')
+    # Regular expression that matches requester_received_pizza line
+    patr = re.compile('\s+"requester_received_pizza": (?P<pizza>.+),')
+    results = []
+    for line in lines:
+        # If line is matches request_text
+        result = re.search(pat, line)
+        if result:
+            # Saves the request_text for later use
+            request_texts.append(result.group('text').lower())
+
+            # Iterate over all words
+            for word in re.findall("[\w\']+", result.group('text')):
+                word = word.lower()
+
+                # Put words not already found into dictionary
+                if word not in theD.keys():
+                    theD[word] = cnt
+                    cnt += 1
+
+        # Make list of all the results of pizze beggars.
+        pizza_result = re.search(patr, line)
+        if pizza_result:
+            results.append(0) if pizza_result.group('pizza') == 'false' else results.append(1)
+
+    # Use word dictionary to create bag-of-words
+    bag = []
+    for i, text in enumerate(request_texts):
+        vec = [0] * len(theD) + [results[i]]
+        for word in re.findall("[\w\']+", text):
+            vec[theD[word]] += 1
+        bag.append(vec)
+
+    return bag
+\end{lstlisting}
+
 
 \section{Exercise 3.1}
 
+\begin{lstlisting}
+def solve_matrix(filename):
+    mat = np.matrix(week2.read_matrix(filename))
+    A = np.matrix(mat[:, range(len(mat))])
+    last_column = np.array(mat[:, len(mat)])
+
+    return np.linalg.solve(A, last_column)
+\end{lstlisting}
+
+Running this script for the file mentioned in the exercise, we get the following result:
+
+\begin{lstlisting}
 [[-5.09090909]
  [ 1.18181818]
  [ 2.24242424]]
+\end{lstlisting}
 
 \section{Exercise 3.2}
  
+\begin{lstlisting} 
+ def roots(filename):
+    points = np.matrix(week2.read_matrix(filename))
+
+    x = np.asarray(points[:, 0]).squeeze()
+    y = np.asarray(points[:, 1]).squeeze()
+
+    z = np.polyfit(x, y, 3)
+    f = np.poly1d(z)
+
+    root = newton(f, 0)
+
+    return root
+\end{lstlisting}
+
+Running this script for the file mentioned in the exercise, we get the following result:
+
+\begin{lstlisting}
 -1.43463628748
+\end{lstlisting}
 
 \section{Exercise 3.3}
+
+\begin{lstlisting}
+def panda_movie_merge():
+    movies = pandas.read_table('week3/movies.dat', sep='::', names=['movie id', 'title', 'genre'])
+    ratings = pandas.read_table('week3/ratings.dat', sep='::', names=['user id', 'movie id', 'rating', 'timestamp'])
+    users = pandas.read_table('week3/users.dat', sep='::', names=['user id', 'gender', 'age', 'occupation code', 'zip'])
+
+    return movies.merge(
+        ratings.merge(users, on='user id'),
+        on='movie id'
+    )
+
+
+def panda_top_movies(movie_data):
+    group_by_movie = movie_data.groupby(['movie id'])
+    ratings_by_movie = group_by_movie['rating'].agg({'rating count': sum})
+
+    top_five = ratings_by_movie.sort(columns='rating count', ascending=False).iloc[0:5]
+    active_titles = ratings_by_movie[ratings_by_movie['rating count'] >= 250]
+
+    movies_ratings = movie_data.merge(active_titles.reset_index(), on='movie id')
+    # filter gender
+    female_ratings = movies_ratings[movies_ratings['gender'].isin(['F'])]
+    male_ratings = movies_ratings[movies_ratings['gender'].isin(['M'])]
+
+    top_3_female_ratings = (
+        female_ratings
+        .groupby(['movie id'])['rating']
+        .agg(['mean'])
+        .sort(columns='mean', ascending=False)
+        .iloc[0:3]
+    )
+    top_3_male_ratings = (
+        male_ratings
+        .groupby(['movie id'])['rating']
+        .agg(['mean'])
+        .sort(columns='mean', ascending=False)
+        .iloc[0:3]
+    )
+
+    gender_means = (
+        female_ratings
+        .groupby(['movie id'])['rating']
+        .agg(['mean'])
+        .reset_index()
+        .merge(
+            (
+                male_ratings
+                .groupby(['movie id'])['rating']
+                .agg(['mean'])
+                .reset_index()
+            ),
+            on='movie id'
+        )
+    )
+
+    gender_means['mean_diff'] = gender_means['mean_x'] - gender_means['mean_y']
+    gender_means_diff_sorted = gender_means.sort(columns='mean_diff', ascending=False)
+
+    top_10_female_mean_diff = gender_means_diff_sorted.iloc[0:10]
+    top_10_male_mean_diff = gender_means_diff_sorted.iloc[-10:].sort(columns='mean_diff', ascending=True)
+
+    top_5_std_rating = (
+        movies_ratings
+        .groupby(['movie id'])['rating']
+        .agg(['std'])
+        .sort(columns='std', ascending=False)
+        .iloc[0:5]
+    )
+
+    return (
+        top_five,
+        active_titles,
+        top_3_female_ratings,
+        top_3_male_ratings,
+        top_10_female_mean_diff,
+        top_10_male_mean_diff,
+        top_5_std_rating
+    )
+\end{lstlisting}
+
+With this, we get the following result:
 
 \subsection{Top five} 
      
@@ -284,7 +589,46 @@ movie id  std
 \end{verbatim}
 
 \section{Exercise 3.4}
+
+\begin{lstlisting}
+def bag_prediction(bag):
+    training_data = bag[:-int(math.floor(len(bag)*0.1))]
+    test_data = bag[-int(math.ceil(len(bag)*0.1)):]
+    dataset = [row[:-1] for row in training_data]
+    t_vec = [row[-1] for row in training_data]
+
+    classifier = LogisticRegression().fit(dataset, t_vec)
+
+    test_dataset = [row[:-1] for row in test_data]
+    test_t_vec = [row[-1] for row in test_data]
+
+    return classifier.predict(test_dataset), classifier.score(test_dataset, test_t_vec)
+\end{lstlisting}
+
+With this, we get a prediction accuracy if \texttt{0.67258883248730961}, which is pretty good considering, that the data is sometimes extremely different, which means it is very hard to predict. If we also take into consideration, that the time of posting may also have a say in whether or not the poster gets pizza, which isn't taken into consideration in the classifier, an accuracy of around 67\% is actually very good.
+
 \section{Exercise 3.5}
+
+\begin{lstlisting}
+import time
+
+
+def sum_quadrant():
+    quadrant_list = []
+    for i in range(1, 10000):
+        quadrant_list += [(1/(i**2))]
+    return sum(quadrant_list)
+
+def run():
+    start_time = time.time()
+    for i in range(500):
+        sum_quadrant()
+    print("It took %s seconds to compute the sum 500 times." % (time.time() - start_time))
+
+
+if "__main__" == __name__:
+    run()
+\end{lstlisting}
 
 \texttt{python week3\_cython.pyx It took 0.771023988724 seconds to compute the sum 500 times.}
 
