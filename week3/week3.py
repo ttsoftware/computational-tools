@@ -126,7 +126,7 @@ if "__main__" == __name__:
     print solve_matrix("week2/matrix3")
     print roots("week3/ENyYffaq.txt")
 
-    pizza_bag = week2.bag_of_words("week2/pizza-train.json", limit=None)
+    pizza_bag = week2.bag_of_words("week2/pizza-train.json")
     print bag_prediction(pizza_bag)
 
     movie_data = panda_movie_merge()
