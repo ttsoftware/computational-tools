@@ -89,4 +89,4 @@ def region_query(dataset, datapoint, epsilon):
     return neighbours
 
 if "__main__" == __name__:
-    print len(scan(os.path.dirname(__file__) + "/../week4/test_files/data_10000points_10000dims.dat", 0.15, 2))
+    print len(scan(os.path.dirname(__file__) + "/../week4/test_files/data_1000points_1000dims.dat", 0.15, 2)) == 9
