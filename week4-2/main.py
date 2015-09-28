@@ -1,15 +1,8 @@
-from itertools import combinations
 import os
 import pickle
 from scipy.sparse import csr_matrix
 from scipy.spatial.distance import jaccard, pdist, squareform
-
-
-def preprocess(data):
-    dataset = csr_matrix(data).indptr
-    print dataset
-    exit()
-    combi = list(combinations(range(len(dataset)), 2))
+import time
 
 
 def scan(filename, epsilon, min_size):
@@ -89,4 +82,6 @@ def region_query(dataset, datapoint, epsilon):
     return neighbours
 
 if "__main__" == __name__:
-    print len(scan(os.path.dirname(__file__) + "/../week4/test_files/data_1000points_1000dims.dat", 0.15, 2)) == 9
+    start_time = time.time()
+    print len(scan(os.path.dirname(__file__) + "/../week4/test_files/data_10000points_10000dims.dat", 0.15, 2))
+    print("--- %s seconds ---" % (time.time() - start_time))
