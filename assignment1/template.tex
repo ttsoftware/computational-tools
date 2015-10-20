@@ -95,8 +95,8 @@
 \usepackage[center,font=small,labelfont=bf,textfont=it]{caption}
 
 \title{Insert Assignment Title Here\\02807 Computational Tools for Big Data}
-\author{Anonymous authors}
-\date{Insert hand in date here}
+\author{Anonymous}
+\date{September 28. 2015}
 
 \setlength\parindent{0pt}		% noindent through whole document
 \usepackage[parfill]{parskip}	% extra linebreak on new paragraph
@@ -638,5 +638,110 @@ It took 0.586192846298 seconds to compute the sum 500 times.}
 We notice the reduce the running time by approximately 0.18 seconds or approximately 20\%.
 
 \section{Exercise 4.1}
+
+The following is the code used to calculate the clusters.
+
+\begin{lstlisting}
+import os
+import pickle
+from scipy.sparse import csr_matrix
+from scipy.spatial.distance import jaccard, pdist, squareform
+import time
+
+
+def scan(filename, epsilon, min_size):
+
+    pkl_file = open(filename, 'rb')
+    data = pickle.load(pkl_file)
+    dataset = [{
+        "data": x,
+        "visited": False,
+        "in_cluster": False,
+        "is_noise": False
+    } for x in squareform(pdist(csr_matrix(data).todense(), 'jaccard'))]
+
+    clusters = []
+
+    for datapoint in dataset:
+        if datapoint['visited']:
+            continue
+
+        datapoint['visited'] = True
+        neighbour_points = region_query(dataset, datapoint, epsilon)
+
+        if len(neighbour_points) < min_size:
+            datapoint['is_noise'] = True
+        else:
+            cluster = expand_cluster(dataset, datapoint, neighbour_points, epsilon, min_size)
+            clusters.append(cluster)
+
+    noise_cluster = {'datapoints': [], 'is_noise': True}
+    for datapoint in dataset:
+        if datapoint['is_noise']:
+            noise_cluster['datapoints'].append(datapoint)
+
+    clusters.append(noise_cluster)
+    return clusters
+
+
+def expand_cluster(dataset, datapoint, neighbour_points, epsilon, min_size):
+    """
+    Expands cluster with epsilon-neighbouring datapoints not belonging to an existing cluster
+    :param datapoint:
+    :param neighbour_points:
+    :param cluster:
+    """
+    cluster = {'datapoints': [datapoint], 'is_noise': False}
+    datapoint['in_cluster'] = True
+
+    for new_datapoint in neighbour_points:
+
+        if not new_datapoint['visited']:
+
+            new_datapoint['visited'] = True
+            new_neighbour_points = region_query(dataset, new_datapoint, epsilon)
+
+            if len(new_neighbour_points) >= min_size:
+                neighbour_points += new_neighbour_points
+
+        if not new_datapoint['in_cluster']:
+            cluster['datapoints'].append(new_datapoint)
+            new_datapoint['is_noise'] = False
+            new_datapoint['in_cluster'] = True
+
+    return cluster
+
+
+def region_query(dataset, datapoint, epsilon):
+    """
+    Returns a list of new datapoints in datapoint's epsilon-neigbourhood
+    :param datapoint:
+    :return:
+    """
+    neighbours = []
+    for i, distance in enumerate(datapoint['data']):
+        if distance <= epsilon:
+            neighbours.append(dataset[i])
+    return neighbours
+
+if "__main__" == __name__:
+    start_time = time.time()
+    print len(scan(os.path.dirname(__file__) + "/../week4/test_files/data_10000points_10000dims.dat", 0.15, 2))
+    print("--- %s seconds ---" % (time.time() - start_time))
+\end{lstlisting}
+
+We start by building a dataset containing all datapoints and their inter-jaccard-distances, which we can later look up in the region query.
+
+The rest of the implementation follows the pseudo code closely.
+
+Our results are as follows:
+
+\begin{verbatim}
+	10 dimension-set: 0.000533103942871 seconds
+	100 dimension-set: 0.00982999801636 seconds
+	1000 dimension-set: 1.14800882339 seconds
+	10000 dimension-set: 1059.263767 seconds
+	100000 dimension-set: <never finished>
+\end{verbatim}
 
 \end{document}
