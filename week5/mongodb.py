@@ -1,3 +1,4 @@
+from pprint import pprint
 from pymongo import MongoClient
 
 
@@ -7,13 +8,10 @@ class Mongodb(object):
         self.client = MongoClient()
         self.db = self.client[dbname]
 
-    def group_by(self, obj, selector, group):
+    def group_by(self, obj, key, condition, reduce_function, initial):
 
         documents = []
-        for doc in self.db[obj].aggregate([
-            {"$match": selector},
-            {"$group": group}
-        ]):
+        for doc in self.db[obj].group(key=key, condition=condition, reduce=reduce_function, initial=initial):
             documents += [doc]
 
         return documents

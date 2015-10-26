@@ -1,8 +1,6 @@
-import os
 from pprint import pprint
 import re
 from week5.mongodb import Mongodb
-from week5.sqlite import SQLite
 
 db = Mongodb('Northwind')
 
@@ -90,7 +88,6 @@ def excercise5_4():
 # pprint(map(lambda x: x['ContactName'], customers))
 
 def excercise5_5():
-
     customers = excercise5_4()
 
     orders = db.find_by('orders', {
@@ -115,4 +112,32 @@ def excercise5_5():
     pprint(len(products))
     pprint(map(lambda x: x['ProductName'], products))
 
-excercise5_5()
+
+# excercise5_5()
+
+
+def excercise5_6():
+    customers = excercise5_4()
+
+    orders = db.find_by('orders', {
+        'CustomerID': {
+            '$in': map(lambda x: x['CustomerID'], customers)
+        }
+    })
+
+    gb = db.group_by(
+        'order-details',
+        key={'ProductID': 1},
+        condition={
+            'OrderID': {
+                '$in': map(lambda x: x['OrderID'], orders)
+            }
+        },
+        reduce_function='function (current, result) { result.total += current.Quantity; }',
+        initial={'total': 0}
+    )
+
+    pprint(len(orders))
+    pprint(gb)
+
+excercise5_6()
