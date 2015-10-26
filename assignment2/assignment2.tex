@@ -127,7 +127,42 @@ enough proof that we have done them all.
 \subsection{Exercise 6.2}
 \label{sub:Exercise 6.2}
 
-https://neo-561d00e7d6feb-561d00e7dd740.do-stories.graphstory.com:7473/browser/
+Using the following query, we are able to find all orders for the customer with
+customerID 'ALFKI', including the products in those orders.
+
+\begin{lstlisting}
 MATCH (customer {customerID:'ALFKI'})--(orders) RETURN orders
+\end{lstlisting}
+
+This returns the following graph from the database:
+
+\includegraphics[scale=0.5]{6_2.png}
+
+Here, the purple circle is the customer, the red circles are orders, and the blue
+circles are the products.
+
+
+\subsection{Exercise 6.3}
+\label{sub:Exercise 6.3}
+
+Using the following query, we are able to find all orders for the customer with
+customerID 'ALFKI', including only the orders with at least 2 products.
+
+\begin{lstlisting}
+MATCH (customer {customerID:'ALFKI'})--(order)
+MATCH p=(order)--(X)
+WITH order as order, count(p) as paths
+WHERE paths > 2
+RETURN order
+\end{lstlisting}
+
+This returns the following graph from the database:
+
+\includegraphics[scale=0.5]{6_3.png}
+
+\subsection{Exercise 6.4}
+\label{sub:Exercise 6.4}
+
+
 
 \end{document}
