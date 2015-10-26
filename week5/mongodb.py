@@ -8,10 +8,10 @@ class Mongodb(object):
         self.client = MongoClient()
         self.db = self.client[dbname]
 
-    def group_by(self, obj, key, condition, reduce_function, initial):
+    def group_by(self, obj, key, condition, reduce_function, initial, finalize=None):
 
         documents = []
-        for doc in self.db[obj].group(key=key, condition=condition, reduce=reduce_function, initial=initial):
+        for doc in self.db[obj].group(key=key, condition=condition, reduce=reduce_function, initial=initial, finalize=finalize):
             documents += [doc]
 
         return documents
