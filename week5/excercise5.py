@@ -137,7 +137,22 @@ def excercise5_6():
         initial={'total': 0}
     )
 
-    pprint(len(orders))
-    pprint(gb)
+    gb.sort(key=lambda x: x['total'], reverse=True)
 
-excercise5_6()
+    pprint(gb[0])
+
+    product = db.find_by('products', {
+        'ProductID': gb[0]['ProductID']
+    })
+
+    pprint(product)
+
+#excercise5_6()
+
+
+def excercise5_7():
+
+    pass
+
+
+excercise5_7()
