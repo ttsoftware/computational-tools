@@ -62,8 +62,8 @@ def excercise5_3():
             pprint(order_products)
 
 
-# excercise5_2()
-# excercise5_3()
+#excercise5_2()
+#excercise5_3()
 
 def excercise5_4():
     order_details = db.find_by('order-details', {'ProductID': 7})
@@ -113,7 +113,7 @@ def excercise5_5():
     pprint(map(lambda x: x['ProductName'], products))
 
 
-# excercise5_5()
+#excercise5_5()
 
 
 def excercise5_6():
@@ -147,7 +147,7 @@ def excercise5_6():
 
     pprint(product)
 
-#excercise5_6()
+excercise5_6()
 
 
 def excercise5_7():
@@ -155,4 +155,4 @@ def excercise5_7():
     pass
 
 
-excercise5_7()
+#excercise5_7()
