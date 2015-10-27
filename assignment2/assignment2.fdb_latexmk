@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1445888113 "/media/secondary/Copy/Studie/DTU/computational tools/assignment2/assignment2.tex" "assignment2.pdf" "assignment2" 1445888114
+["pdflatex"] 1445888407 "/media/secondary/Copy/Studie/DTU/computational tools/assignment2/assignment2.tex" "assignment2.pdf" "assignment2" 1445888408
   "/etc/texmf/web2c/texmf.cnf" 1419195109 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/media/secondary/Copy/Studie/DTU/computational tools/assignment2/assignment2.tex" 1445888111 14781 4119aa0445d2560b89aa8824fce5c369 ""
+  "/media/secondary/Copy/Studie/DTU/computational tools/assignment2/assignment2.tex" 1445888406 14804 a2e6e8db803494d29da643567c88fef5 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -121,14 +121,14 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1419195168 3822875 5d728b44ee2b1bf0e32fd215fa4e363c ""
   "6_2.png" 1445877642 59132 4029499b308dcb74c1dc16de11b34192 ""
   "6_3.png" 1445885003 52871 fba6335dc62b6c4b41ee466dac217737 ""
-  "assignment2.aux" 1445888114 2849 cd5c0902418dd0fb7a10a93653a4dfab ""
-  "assignment2.out" 1445888114 703 602555d1da41ab1053d9585e7e9121a2 ""
-  "assignment2.tex" 1445888111 14781 4119aa0445d2560b89aa8824fce5c369 ""
+  "assignment2.aux" 1445888408 2849 4a64fd5910592bb8fc857d6873168d5e ""
+  "assignment2.out" 1445888408 703 602555d1da41ab1053d9585e7e9121a2 ""
+  "assignment2.tex" 1445888406 14804 a2e6e8db803494d29da643567c88fef5 ""
   "delete_all.png" 1445877642 10966 cfaef8cfb530f4246a9a7c99d664e8c0 ""
   "graph_story.png" 1445877642 52207 8810a8b32b4bb74b13d3b0956f5b1872 ""
   "insert_data.png" 1445877642 18077 6c4281665e535298fc301071331bf810 ""
   (generated)
-  "assignment2.log"
   "assignment2.out"
-  "assignment2.aux"
+  "assignment2.log"
   "assignment2.pdf"
+  "assignment2.aux"
