@@ -5,8 +5,13 @@ build/*
 *.pyc
 *.so
 *.c
+*/*.aux
+*/*.fcb_latexmk
+*/*.fls
+*/*.log
+*/*.out
+*/*.pdf
 week9/.vagrant
 week9/.vagrant/*
 week10/.vagrant
 week10/.vagrant/*
-
