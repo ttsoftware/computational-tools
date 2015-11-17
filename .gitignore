@@ -5,3 +5,9 @@ build/*
 *.pyc
 *.so
 *.c
+*/*.aux
+*/*.fcb_latexmk
+*/*.fls
+*/*.log
+*/*.out
+*/*.pdf
