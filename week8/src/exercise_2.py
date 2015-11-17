@@ -3,6 +3,7 @@ from mrjob.step import MRStep
 
 
 class exercise_2(MRJob):
+
     def steps(self):
         return [
             MRStep(
@@ -10,7 +11,7 @@ class exercise_2(MRJob):
                 reducer=self.reducer
             ),
             MRStep(
-                reducer=self.combine
+                reducer=self.combine_reduced_values
             )
         ]
 
@@ -21,7 +22,7 @@ class exercise_2(MRJob):
     def reducer(self, key, values):
         yield None, sum(values) % 2 == 0
 
-    def combine(self, _, values):
+    def combine_reduced_values(self, _, values):
         yield None, self.is_list_true(values)
 
     def is_list_true(self, l):

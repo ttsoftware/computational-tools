@@ -37,7 +37,9 @@ class WordCountTest(unittest.TestCase):
 
     def test_exercise_3(self):
 
-        sys.argv[1] = "../data/facebook_combined.txt"
-        sys.argv[2] = "-q"
+        sys.argv.append("../data/facebook_combined.txt")
+        #sys.argv.append("--base-tmp-dir=../data/output")
+        #sys.argv.append("--cleanup=NONE")
+        sys.argv.append("--output-dir=../data/output")
 
         exercise_3().run()

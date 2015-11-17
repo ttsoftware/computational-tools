@@ -7,22 +7,32 @@ class exercise_3(MRJob):
     def steps(self):
         return [
             MRStep(
-                mapper=self.mapper_one,
+                mapper=self.mapper,
+                reducer=self.friend_pairs
             ),
             MRStep(
-                mapper=self.friends_of_friends,
-                reducer=self.test_reducer
+                reducer=self.friend_intersection
             )
         ]
 
-    def mapper_one(self, _, line):
+    def mapper(self, _, line):
         user, friend = line.split()
-        yield user, friend
+        yield int(user), int(friend)
+        yield int(friend), int(user)  # make sure we have the opposite relation from B to A
 
-    def friends_of_friends(self, user, friends):
-        for friend in friends:
-            yield [user, friend].sort(), friends
+    def friend_pairs(self, user, friends):
+        friend_list = reduce(lambda x, y: x + [y], friends, [])
 
-    def test_reducer(self, key, values):
-        print key, reduce(lambda x, y: x + [y], values, [])
-        yield key, values
+        for friend in friend_list:
+            yield sorted([user, friend]), friend_list
+
+    def friend_intersection(self, friend_pair, combined_friends):
+
+        combined_friends = reduce(lambda x, y: x + [y], combined_friends, [])
+        intersection = []
+
+        for friend in combined_friends[0]:
+            if friend in combined_friends[1]:
+                intersection += [friend]
+
+        yield friend_pair, intersection
