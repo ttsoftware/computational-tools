@@ -23,9 +23,10 @@ class exercise_2(MRJob):
         yield None, sum(values) % 2 == 0
 
     def combine_reduced_values(self, _, values):
-        yield None, self.is_list_true(values)
+        yield "Does an Euler tour exist?", self.is_list_true(values)
 
-    def is_list_true(self, l):
+    @staticmethod
+    def is_list_true(l):
         is_true = True
         for x in l:
             is_true = is_true and x
