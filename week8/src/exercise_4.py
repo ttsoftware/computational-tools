@@ -10,15 +10,9 @@ class exercise_4(MRJob):
                 mapper=self.mapper,
                 reducer=self.reducer
             ),
-            MRStep(
-                reducer=self.discover_triangles
-            ),
-            MRStep(
-                reducer=self.count_triangles
-            ),
-            MRStep(
-                reducer=self.sum_triangles
-            )
+            MRStep(reducer=self.discover_triangles),
+            MRStep(reducer=self.count_triangles),
+            MRStep(reducer=self.sum_triangles)
         ]
 
     def mapper(self, _, line):
