@@ -1,0 +1,10 @@
+.idea
+.idea/*
+build
+build/*
+*.pyc
+*.so
+*.c
+week9/.vagrant
+week9
+/.vagrant/*

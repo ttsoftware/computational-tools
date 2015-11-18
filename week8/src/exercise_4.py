@@ -11,7 +11,7 @@ class exercise_4(MRJob):
                 reducer=self.reducer
             ),
             MRStep(
-                reducer=self.triangles
+                reducer=self.discover_triangles
             ),
             MRStep(
                 reducer=self.count_triangles
@@ -38,7 +38,7 @@ class exercise_4(MRJob):
         for n in nodes:
             yield sorted([node, n]), (n, nodes)
 
-    def triangles(self, node_pair, connecting_nodes):
+    def discover_triangles(self, node_pair, connecting_nodes):
         """
         We have all nodes associated with both nodes in node_pair (connecting_nodes)
         If both nodes in node_pair have the same connecting node, they must form a triangle
