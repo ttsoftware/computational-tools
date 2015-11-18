@@ -1,13 +1,13 @@
 from __future__ import division
+import hashlib
 import json
 from sklearn.ensemble import RandomForestClassifier as rfc
-from sklearn.feature_extraction import FeatureHasher
 
 
 directory = "../../full/"
 
 
-def bag_of_words(lines):
+def bag_of_words(lines, N):
 
     uniq = set()
 
@@ -29,7 +29,8 @@ def bag_of_words(lines):
     for line in lines:
         vec = [0] * uniq_len
         for word in line[0].split():
-            vec[uniq_dict[word]] += 1
+            h = int(hashlib.md5(word).hexdigest(), 16) % N
+            vec[h] += 1
         bag.append((vec, (1 if 'earn' in line[1] else 0)))
 
     return bag
@@ -48,32 +49,27 @@ if __name__ == "__main__":
                                                and (len(y['body']) > 0)
                                             else []), articles, [])
 
-    lines = map(lambda x: (x['body'].lower(), x['topics']), articles)
+    lines = map(lambda x: (x['body'].lower().encode('ascii', errors='ignore'), x['topics']), articles)
 
-    bow = bag_of_words(lines)
+    bow = bag_of_words(lines, 1000)
     print "Amount of lines: " + str(len(bow))
     print "Amount of words: " + str(len(bow[0][0]))
 
-    # training_set = bow[:int(round(len(bow)*0.8))]
-    # training_set_data = [row[0] for row in training_set]
-    # training_set_target = [row[1] for row in training_set]
-    #
-    # test_set = bow[-int(round(len(bow)*0.2)):]
-    # test_set_data = [row[0] for row in test_set]
-    # test_set_target = [row[1] for row in test_set]
-    #
-    # classifier = rfc()
-    # classifier.fit(training_set_data, training_set_target)
-    # predictions = classifier.predict(test_set_data)
-    #
-    # accuracy = []
-    # for i, prediction in enumerate(predictions):
-    #     accuracy += [test_set_target[i] == prediction]
-    # accuracy = accuracy.count(True) / len(test_set_target)
-    #
-    # print "Accuracy of classifier: " + str(accuracy) + "%"
+    training_set = bow[:int(round(len(bow)*0.8))]
+    training_set_data = [row[0] for row in training_set]
+    training_set_target = [row[1] for row in training_set]
 
-    hasher = FeatureHasher()
-    hashed_bow = hasher.transform([row[0] for row in bow])
+    test_set = bow[-int(round(len(bow)*0.2)):]
+    test_set_data = [row[0] for row in test_set]
+    test_set_target = [row[1] for row in test_set]
 
-    print hashed_bow
+    classifier = rfc(n_estimators=50)
+    classifier.fit(training_set_data, training_set_target)
+    predictions = classifier.predict(test_set_data)
+
+    accuracy = []
+    for i, prediction in enumerate(predictions):
+        accuracy += [test_set_target[i] == prediction]
+    accuracy = accuracy.count(True) / len(test_set_target)
+
+    print "Accuracy of classifier: " + str(accuracy) + "%"
