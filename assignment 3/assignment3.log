@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.18)  17 NOV 2015 15:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.18)  17 NOV 2015 20:18
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -916,28 +916,49 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 107.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) 
-AED: lastpage setting LastPage
+) <cat.png, id=32, 677.53125pt x 717.68124pt>
+File: cat.png Graphic file (type png)
+<use cat.png>
+Package pdftex.def Info: cat.png used on input line 130.
+(pdftex.def)             Requested size: 338.76479pt x 358.83974pt.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 130.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <cat2.png, id=45, 704.6325
+pt x 322.20375pt>
+File: cat2.png Graphic file (type png)
+<use cat2.png>
+Package pdftex.def Info: cat2.png used on input line 132.
+(pdftex.def)             Requested size: 352.3154pt x 161.10147pt.
+<lion1.png, id=46, 718.685pt x 709.65125pt>
+File: lion1.png Graphic file (type png)
+<use lion1.png>
+Package pdftex.def Info: lion1.png used on input line 136.
+(pdftex.def)             Requested size: 359.34161pt x 354.82475pt.
+[2 <./cat.png> <./cat2.png>] <lion2.png, id=51, 707.64375pt x 336.25626pt>
+File: lion2.png Graphic file (type png)
+<use lion2.png>
+Package pdftex.def Info: lion2.png used on input line 138.
+(pdftex.def)             Requested size: 353.82101pt x 168.12772pt.
+
+AED: lastpage setting LastPage
+[3 <./lion1.png> <./lion2.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 146.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 146.
 (./assignment3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 130.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 130.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 146.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 146.
 Package rerunfilecheck Info: File `assignment3.out' has not changed.
-(rerunfilecheck)             Checksum: CF6AA7EED1C948DFDC388C5D763E83EF;350.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 130.
+(rerunfilecheck)             Checksum: ECFCF7ED5401BA34F75B29CE7DD27ABB;409.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 146.
  ) 
 Here is how much of TeX's memory you used:
- 13236 strings out of 493304
- 203763 string characters out of 6139871
+ 13261 strings out of 493304
+ 204050 string characters out of 6139871
  329771 words of memory out of 5000000
- 16507 multiletter control sequences out of 15000+600000
+ 16524 multiletter control sequences out of 15000+600000
  11301 words of font info for 45 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,6n,43p,774b,337s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,7n,43p,774b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
@@ -945,10 +966,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy10.pfb>
-Output written on assignment3.pdf (1 page, 80940 bytes).
+Output written on assignment3.pdf (3 pages, 534261 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 84 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 

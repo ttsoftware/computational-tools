@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1447770541 "/home/rasmus/Documents/computational tools for big data/computational-tools/assignment 3/assignment3.tex" "assignment3.pdf" "assignment3" 1447770542
+["pdflatex"] 1447787937 "/home/rasmus/Documents/computational tools for big data/computational-tools/assignment 3/assignment3.tex" "assignment3.pdf" "assignment3" 1447787938
   "/etc/texmf/web2c/texmf.cnf" 1424264595 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/rasmus/Documents/computational tools for big data/computational-tools/assignment 3/assignment3.tex" 1447770541 4936 6ff8cc65758dc065de6d9485e20600f4 ""
+  "/home/rasmus/Documents/computational tools for big data/computational-tools/assignment 3/assignment3.tex" 1447787937 5618 a23c0b173a48d61fc3d8690b23e12bac ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -108,11 +108,15 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1424264725 1346346 7f2b8b715a9ddb095afe3697a6ba02b5 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1424264671 3822874 247c3391a4b162b79b3328f0973f1596 ""
-  "assignment3.aux" 1447770542 1485 d4df6a460b364808892c7dbd2c992fb1 ""
-  "assignment3.out" 1447770542 350 cf6aa7eed1c948dfdc388c5d763e83ef ""
-  "assignment3.tex" 1447770541 4936 6ff8cc65758dc065de6d9485e20600f4 ""
+  "assignment3.aux" 1447787938 1578 907e55c61c2798be67ae46ee9284ba0c ""
+  "assignment3.out" 1447787938 409 ecfcf7ed5401ba34f75b29ce7dd27abb ""
+  "assignment3.tex" 1447787937 5618 a23c0b173a48d61fc3d8690b23e12bac ""
+  "cat.png" 1447786975 171528 55adc96e599ef70bfefc31397ee26958 ""
+  "cat2.png" 1447787000 48462 ff5b8eb42f7bda30eb11ceba7e511abf ""
+  "lion1.png" 1447787298 172508 1ec4cc9c3beb29fc4f765687fc471711 ""
+  "lion2.png" 1447787315 52763 145cc288874c7c49efb55904c833eea1 ""
   (generated)
-  "assignment3.log"
-  "assignment3.pdf"
   "assignment3.out"
   "assignment3.aux"
+  "assignment3.log"
+  "assignment3.pdf"
