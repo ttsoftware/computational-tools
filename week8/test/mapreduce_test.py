@@ -6,6 +6,7 @@ import sys
 from src.exercise_1 import exercise_1
 from src.exercise_2 import exercise_2
 from src.exercise_3 import exercise_3
+from src.exercise_4 import exercise_4
 
 
 class WordCountTest(unittest.TestCase):
@@ -40,6 +41,13 @@ class WordCountTest(unittest.TestCase):
         sys.argv.append("../data/facebook_combined.txt")
         #sys.argv.append("--base-tmp-dir=../data/output")
         #sys.argv.append("--cleanup=NONE")
-        sys.argv.append("--output-dir=../data/output")
+        sys.argv.append("--output-dir=../data/output/facebook")
 
         exercise_3().run()
+
+    def test_exercise_4(self):
+
+        sys.argv.append("../data/roadNet-CA/roadNet-CA_no-headers.mtx")
+        sys.argv.append("--output-dir=../data/output/roadnet")
+
+        exercise_4().run()
