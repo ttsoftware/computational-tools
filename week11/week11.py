@@ -4,7 +4,7 @@ import json
 from sklearn.ensemble import RandomForestClassifier as rfc
 
 
-directory = "../../full/"
+directory = "data/"
 
 
 def bag_of_words(lines):
